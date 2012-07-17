@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new BiblioSights\MarkerBundle\BiblioSightsMarkerBundle(),
+            new BiblioSights\MarkerBundle\MarkerBundle(),
             new BiblioSights\BookBundle\BookBundle(),
         );
 

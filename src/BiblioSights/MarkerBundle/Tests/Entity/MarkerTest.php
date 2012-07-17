@@ -25,7 +25,7 @@ class MarkerTest extends \PHPUnit_Framework_TestCase
        $marker->setPoint($point);
        $this->em->persist($marker);
        $this->em->flush();
-       $puntos = $this->em->getRepository('BiblioSightsMarkerBundle:Marker')->findAll();
+       $puntos = $this->em->getRepository('MarkerBundle:Marker')->findAll();
        // Comprobamos que sólo hay un punto, el que hemos creado
        $this->assertEquals(1, count($puntos));
        
@@ -41,7 +41,7 @@ class MarkerTest extends \PHPUnit_Framework_TestCase
 
        $this->em->remove($marker);
        $this->em->flush();
-       $puntos = $this->em->getRepository('BiblioSightsMarkerBundle:Marker')->findAll();
+       $puntos = $this->em->getRepository('MarkerBundle:Marker')->findAll();
        // Comprobamos que se ha vaciado la base de datos
        $this->assertEquals(0, count($puntos));
     }
