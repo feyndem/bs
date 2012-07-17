@@ -1,0 +1,13 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: 
+    database_name: bibliosights
+    database_user: root
+    database_password: 3rcdt7
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 98be91385932e609fd3ad5863d9d6e22

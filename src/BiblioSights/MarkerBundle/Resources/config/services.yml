@@ -1,0 +1,7 @@
+parameters:
+#    biblio_sights_marker.example.class: BiblioSights\MarkerBundle\Example
+
+services:
+#    biblio_sights_marker.example:
+#        class: %biblio_sights_marker.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
