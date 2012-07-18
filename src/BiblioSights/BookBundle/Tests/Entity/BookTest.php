@@ -21,46 +21,18 @@ class BookTest extends \PHPUnit_Framework_TestCase
     
     public function testBook()
     {
-       $point = new Point(2, -3);
-       $marker = new Marker(); 
-       $book =  new Book();
-       
-       $marker->setPoint($point);
-       $book->addMarker($marker);
-       
-       $this->em->persist($marker);
-       $this->em->persist($book);
-       $this->em->flush();
-       
-       $libros = $this->em->getRepository('BookBundle:Book')->findAll();
-       // Comprobamos que sólo hay un punto, el que hemos creado
-       $this->assertEquals(1, count($libros));
-       
-       $libro = $libros[0];
-       $marcadores = $libro->getMarkers();
-       
-       $this->assertEquals(1, count($libros));
-       
-       foreach ($marcadores as $marcador)
-       {
-           $this->assertEquals(2, $marcador->getPoint()->getLat());
-           $this->assertEquals(-3, $marcador->getPoint()->getLng());
-       }
-       
-       $now = strtotime('now');
-       $entity_date = $libro->getCreated()->getTimestamp();
-       // Comprobamos que se ha introducido una fecha y que es menor o igual a la actual
-       $this->assertGreaterThanOrEqual($entity_date, $now);
-       //$update_now = new Date('now');
-       //$libro->setUpdated($update_now);
-       $entity_date = $libro->getUpdated()->getTimestamp();
-       $this->assertGreaterThanOrEqual($entity_date, $now);
-       
-       $this->em->remove($marker);
-       $this->em->remove($book);
-       $this->em->flush();
-       $libros = $this->em->getRepository('BookBundle:Book')->findAll();
-       // Comprobamos que se ha vaciado la base de datos
-       $this->assertEquals(0, count($libros));
+        $books = $this->em->getRepository('BookBundle:Book')->findAll();
+        $this->assertEquals(1, count($books));
+        foreach($books as $book)
+        {
+            $markers = $book->getMarkers();
+            $i = 1;
+            foreach ($markers as $marker)
+            {
+                $this->assertEquals($i, $marker->getPoint()->getLat());
+                $this->assertEquals($i+1, $marker->getPoint()->getLng());
+                $i++;
+            }
+        }
     }
 }

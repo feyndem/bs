@@ -2,8 +2,8 @@ BookBundle:
     resource: "@BookBundle/Resources/config/routing.yml"
     prefix:   /
 
-BiblioSightsMarkerBundle:
-    resource: "@BiblioSightsMarkerBundle/Resources/config/routing.yml"
+MarkerBundle:
+    resource: "@MarkerBundle/Resources/config/routing.yml"
     prefix:   /
 
 # Internal routing configuration to handle ESI

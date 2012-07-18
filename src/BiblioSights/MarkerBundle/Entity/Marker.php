@@ -44,6 +44,12 @@ class Marker
      */
     protected $book;
     
+    public function __construct(\BiblioSights\BookBundle\Entity\Book $book)
+    {
+        $this->book = $book;
+        $book->addMarker($this);
+    }
+    
     /**
      * Get id
      *
