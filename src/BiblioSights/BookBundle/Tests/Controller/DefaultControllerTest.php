@@ -2,16 +2,28 @@
 
 namespace BiblioSights\BookBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+require_once dirname(__DIR__).'/../../../../app/AppKernel.php';
+use BiblioSights\MarkerBundle\Entity\Point\Point;
+use BiblioSights\MarkerBundle\Entity\Marker;
+use BiblioSights\BookBundle\Entity\Book;
 
-class DefaultControllerTest extends WebTestCase
+class BookControllerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testIndex()
+    private $em;
+    private $kernel;
+
+    public function setUp()
     {
-        $client = static::createClient();
-
-        $crawler = $client->request('GET', '/hello/Fabien');
-
-        $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);
+        $this->kernel = new \AppKernel('test', true);
+        $this->kernel->boot();
+        $this->em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+    }
+    
+    public function testBookIndex()
+    {
+        $BookQuery = $this->em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id',22);
+        $Book = $BookQuery->getSingleResult();   
+        $this->assertEquals(1, count($Book));
+        $this->assertEquals(22, $Book->getId());        
     }
 }

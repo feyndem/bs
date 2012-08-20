@@ -19,16 +19,23 @@ class book_basic implements FixtureInterface, ContainerAwareInterface
     
     public function load(ObjectManager $manager)
     {
-        $book = new Book();
-        for ($i=1; $i<=10; $i++)
+        for ($i=1; $i<10; $i++)
         {
-            $point = new Point($i, $i+1);
-            $marker = new Marker($book);
-            $marker->setPoint($point);
-            $book->addMarker($marker);
-            $manager->persist($marker); 
+            $book = new Book();
+            $manager->persist($book);
+            
+            for ($j=1; $j<10; $j++)
+            {
+                $num1 = mt_rand(-949042, 3375459);
+                $num2 = mt_rand(4451692, 8057074);
+                $point = new Point($num1, $num2);
+                $marker = new Marker($book);
+                $marker->setPoint($point);
+                //$book->addMarker($marker);
+                $manager->persist($marker); 
+            }
+            
+            $manager->flush();
         }
-        $manager->persist($book);
-        $manager->flush();
     }
 }

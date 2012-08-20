@@ -1,6 +1,6 @@
 BookBundle:
     resource: "@BookBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /book
 
 MarkerBundle:
     resource: "@MarkerBundle/Resources/config/routing.yml"

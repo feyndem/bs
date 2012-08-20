@@ -64,11 +64,15 @@ swiftmailer:
     
 services:
     twig.extension.debug:
-        class:  Twig_Extension_Debug
+        class:  Twig_Extensions_Extension_Debug
         tags:
             - { name: 'twig.extension' }
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+    twig.extension.map:
+        class: BiblioSights\BookBundle\Twig\Extension\MapExtension
         tags:
             - { name: twig.extension }
             

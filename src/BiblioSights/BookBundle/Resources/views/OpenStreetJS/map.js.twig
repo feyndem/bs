@@ -1,0 +1,79 @@
+<script type='text/javascript'>
+    // Variable global para el mapa
+    var map;
+    // Variable global para la capa vectorial
+    var vector_layer;    
+    // Función de arranque
+    function init() {
+        // Array con los controles que queremos meter en el mapa
+        var controls_array = [
+            new OpenLayers.Control.Navigation({}),
+            new OpenLayers.Control.PanZoomBar({}),
+            new OpenLayers.Control.Permalink()     
+        ];   
+        // Objeto mapa de OpenLayers.
+        // El primer argumento es el elemento html que acoge el mapa
+        // El segundo es un literal con opciones del mapa
+        map = new OpenLayers.Map('map_element', {
+            //// Proyección que usamos en el mapa
+            projection: new OpenLayers.Projection('ESPG:900913'),
+            // Límites del mapa
+            maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
+            // Resolución máxima (tiene que ver con los niveles de zoom)
+            maxResolution: 156543.0039,
+            // Unidades a usar
+            units: 'm',
+            // Array con los controles
+            controls: controls_array
+        });
+        // Objeto de capa OpenStreetMap
+        // El primer argumento es el nombre que le damos, libre
+        // El segundo es el enlace al servidor de mapas
+        // El tercero son opciones, en este caso marcamos la capa para que use 
+        // la proyección que corresponde con spherical-mercator
+        var OSM_layer = new OpenLayers.Layer.OSM('OSMLayer', 'http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png', {sphericalMercator: true});
+        // Objeto de capa vectorial
+        // Primer argumento, el nombre
+        // Segundo argumento, un literal con opciones
+        vector_layer = new OpenLayers.Layer.Vector('Advanced Vector Layer',{    
+            // Protocolo, a definir
+            protocol: vector_protocol,
+            // Estrategias, a definir
+            strategies: vector_strategies
+        });
+        // Panel que nos da acceso a la herramienta para marcar puntos
+        // Creamos una barra de herramientas en la que podemos marcar la clase
+        // que se le aplica en html.
+        var toolbar = new OpenLayers.Control.Panel({
+            displayClass: 'olControlEditingToolbar'
+        });
+        // Creamos el objeto que corresponde a la herramienta para dibujar
+        // El primer argumento es la capa vectorial a la que se aplica
+        // El segundo es la herramienta específica de dibujo que queremos
+        // El tercero es un literal con opciones
+        var panelControls = [
+            new OpenLayers.Control.DrawFeature( vector_layer, OpenLayers.Handler.Point,
+            {'displayClass': 'olControlDrawFeaturePoint'})
+        ];
+        // Cargar el mapa con los elementos de la IU
+        // Añadimos el panel a la barra de herramientas
+        toolbar.addControls(panelControls);
+        // Añadimos la barra de herramientas al mapa    
+        map.addControl(toolbar);
+        // Añadimos las capas al mapa
+        map.addLayers ([OSM_layer, vector_layer]);
+        // Habitar la posibilidad de seleccionar marcadores
+        var select_feature_control = new OpenLayers.Control.SelectFeature(vector_layer,{
+            multiple: false,
+            toggle: true,
+            multipleKey: 'shiftKey'
+           });
+        // Añadimos al mapa la habilitación y la activamos
+        map.addControl(select_feature_control);
+        select_feature_control.activate();
+        // Obtener el centro y centrar el mapa
+        if (!map.getCenter()) {
+            map.zoomToMaxExtent();
+        }
+}
+</script>

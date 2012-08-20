@@ -1,1 +1,18 @@
-Hello {{ name }}!
+<!DOCTYPE html> 
+<html lang='en'> 
+<head> 
+    <meta charset='utf-8' /> 
+    <title>My OpenLayers Map</title>    
+</head>
+<body>
+    {{ book.created|date("m/d/Y") }}
+    {{ book.id }}
+    {% for marker in book.markers %}
+        <p>
+        {{ marker.point.lat }}
+        {{ marker.point.lng }}
+        </p>
+    {% endfor %}
+    {% include 'BookBundle:OpenStreetJS:map.js.twig' %}
+</body>
+</html>
