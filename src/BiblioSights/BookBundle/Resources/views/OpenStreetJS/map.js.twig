@@ -5,6 +5,8 @@
     var vector_layer;    
     // Función de arranque
     function init() {
+        OpenLayers.ImgPath = "{{ asset ('bundles/book/images/') }}";
+
         // Array con los controles que queremos meter en el mapa
         var controls_array = [
             new OpenLayers.Control.Navigation({}),
@@ -24,7 +26,9 @@
             // Unidades a usar
             units: 'm',
             // Array con los controles
-            controls: controls_array
+            controls: controls_array,
+            // Para poder cargar el CSS de OL desde la carpeta adecuada
+            theme: null
         });
         // Objeto de capa OpenStreetMap
         // El primer argumento es el nombre que le damos, libre
@@ -37,10 +41,13 @@
         // Segundo argumento, un literal con opciones
         vector_layer = new OpenLayers.Layer.Vector('Advanced Vector Layer',{    
             // Protocolo, a definir
-            protocol: vector_protocol,
+            //protocol: vector_protocol,
             // Estrategias, a definir
-            strategies: vector_strategies
+            //strategies: vector_strategies
         });
+        
+        
+        
         // Panel que nos da acceso a la herramienta para marcar puntos
         // Creamos una barra de herramientas en la que podemos marcar la clase
         // que se le aplica en html.
@@ -62,6 +69,12 @@
         map.addControl(toolbar);
         // Añadimos las capas al mapa
         map.addLayers ([OSM_layer, vector_layer]);
+        // Bucle para añadir puntos
+        {% for marker in markers %}
+            var point = new OpenLayers.Geometry.Point({{ marker.point.lat }}, {{ marker.point.lng }});
+            var feature_point = new OpenLayers.Feature.Vector(point);
+            map.layers[1].addFeatures([feature_point]);            
+        {% endfor %}
         // Habitar la posibilidad de seleccionar marcadores
         var select_feature_control = new OpenLayers.Control.SelectFeature(vector_layer,{
             multiple: false,
@@ -70,10 +83,12 @@
            });
         // Añadimos al mapa la habilitación y la activamos
         map.addControl(select_feature_control);
+        map.addControl(new OpenLayers.Control.MousePosition());
         select_feature_control.activate();
         // Obtener el centro y centrar el mapa
-        if (!map.getCenter()) {
-            map.zoomToMaxExtent();
-        }
+        map.zoomToExtent(map.layers[1].getDataExtent());
+        //if (!map.getCenter()) {
+        //    map.zoomToMaxExtent();
+        //}
 }
 </script>

@@ -2,17 +2,14 @@
 <html lang='en'> 
 <head> 
     <meta charset='utf-8' /> 
-    <title>My OpenLayers Map</title>    
+    <title>My OpenLayers Map</title>
+    <script type="text/javascript" src="{{ asset ('bundles/book/js/OpenLayers.js') }}"></script>
+    <link rel="stylesheet" href= "{{ asset ('bundles/book/css/style.css') }}"   type="text/css" />
+    {% include 'BookBundle:OpenStreetJS:map.js.twig' with {'markers' : book.markers} %}
 </head>
-<body>
+<body onload='init();'>
+    <div id="map_element" style='width: 100%; height: 300px;'></div>
     {{ book.created|date("m/d/Y") }}
     {{ book.id }}
-    {% for marker in book.markers %}
-        <p>
-        {{ marker.point.lat }}
-        {{ marker.point.lng }}
-        </p>
-    {% endfor %}
-    {% include 'BookBundle:OpenStreetJS:map.js.twig' %}
 </body>
 </html>
