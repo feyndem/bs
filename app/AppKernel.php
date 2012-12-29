@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new BiblioSights\MarkerBundle\MarkerBundle(),
             new BiblioSights\BookBundle\BookBundle(),
+            new Bibliosights\UserBundle\UserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
