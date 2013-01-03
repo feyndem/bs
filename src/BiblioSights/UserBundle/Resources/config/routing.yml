@@ -1,3 +1,9 @@
-user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: UserBundle:Default:index }
+user_login:
+    pattern:  /login
+    defaults: { _controller: UserBundle:Default:login }
+
+user_login_check:
+    pattern:  /login_check
+
+user_logout:
+    pattern:  /logout
