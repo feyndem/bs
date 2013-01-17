@@ -9,10 +9,6 @@ BookBundle:
 MarkerBundle:
     resource: "@MarkerBundle/Resources/config/routing.yml"
     prefix:   /
-    
-Home:
-    pattern: /
-    defaults: { _controller: BookBundle:Default:home }
 
 # Internal routing configuration to handle ESI
 #_internal:
