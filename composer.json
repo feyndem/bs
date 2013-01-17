@@ -24,10 +24,31 @@
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
-        "knplabs/knp-menu": "2.0.*@dev",
-        "knplabs/knp-menu-bundle": "2.0.*@dev",
-        "braincrafted/bootstrap-bundle": "dev-master"
+        "mopa/composer-bridge": "dev-master",
+        "mopa/bootstrap-bundle": "dev-master",
+        "twitter/bootstrap": "dev-master",
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "knplabs/knp-menu-bundle": "dev-master",
+        "craue/formflow-bundle": "dev-master"
     },
+    "repositories": [
+       {
+           "type": "package",
+           "package": {
+               "version": "dev-master",
+               "name": "twitter/bootstrap",
+               "source": {
+                   "url": "https://github.com/twitter/bootstrap.git",
+                   "type": "git",
+                   "reference": "master"
+               },
+               "dist": {
+                   "url": "https://github.com/twitter/bootstrap/zipball/master",
+                   "type": "zip"
+                }
+           }
+       }
+    ],
     "scripts": {
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
