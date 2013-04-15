@@ -1,0 +1,15 @@
+<!DOCTYPE html> 
+<html lang='en'> 
+<head> 
+    <meta charset='utf-8' /> 
+    <title>Home</title>
+    {% block stylesheets %}
+        {% stylesheets '@BookBundle/Resources/public/css/basic.scss' filter="compass" %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+@import "foundation";
+@import "compass/css3";
+.simple   { @include border-radius(4px, 4px); }
+
+* {
+ width: 500 px;
+}

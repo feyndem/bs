@@ -13,4 +13,9 @@ class DefaultController extends Controller
         $Book = $BookQuery->getSingleResult();        
         return $this->render('BookBundle:Default:index.html.twig', array('book'=>$Book));
     }
+    
+    public function homeAction()
+    {
+        return $this->render('BookBundle:Default:home.html.twig');
+    }
 }
