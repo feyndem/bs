@@ -1,13 +1,54 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!DOCTYPE html> 
+<html lang='en'> 
+<head> 
+    <meta charset='utf-8' /> 
+    <title>{% block title %}Test Application{% endblock %}</title>
+     {% block stylesheets %}
+        {% stylesheets '@BookBundle/Resources/public/css/basic.scss' filter="compass" %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}         
+</head>
+<body>
+    <nav class="top-bar">
+        <ul class="title-area">
+        <!-- Title Area -->
+            <li class="name">
+                <h1><a href="#">Bibliosights</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+        <section class="top-bar-section">
+            <ul class="left">
+                <li class="divider"></li>
+                <li><a href="#">Main Item 1</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Main Item 2</a></li>
+            </ul>   
+            {{ render (controller('UserBundle:Default:loginBox')) }}
+        </section>
+    </nav>
+    {% block content %} {% endblock %}    
+    {% block sidebar %} {% endblock %}   
+    {% block javascripts %}
+        {% javascripts '@BookBundle/Resources/public/js/vendor/custom.modernizr.js' output='js/custom.modernizr.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% javascripts '@BookBundle/Resources/public/js/vendor/jquery.js' output='js/jquery.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %} 
+        {% javascripts '@BookBundle/Resources/public/js/vendor/foundation.js' output='js/foundation.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}  
+        {% javascripts '@BookBundle/Resources/public/js/vendor/foundation.topbar.js' output='js/foundation.topbar.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% javascripts '@BookBundle/Resources/public/js/vendor/OpenLayers.js' output='js/OpenLayers.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        <script>
+        $(document).foundation();
+        </script>
+    {% endblock %}            
+</body>
 </html>

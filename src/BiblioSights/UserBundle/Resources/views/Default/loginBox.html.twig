@@ -1,0 +1,19 @@
+<ul class="right">
+    <form action="{{ path('user_login_check') }}" method="POST">
+        <div class="column">
+            <li>
+            <label for="username">User: </label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            </li>
+       </div>
+       <div class="column">   
+           <li>
+           <label for="password">Password: </label>
+           <input type="password" id="password" name="_password" />
+           </li>
+       </div>
+       <div class="column">     
+           <li class="has-button"><input type="submit" name="login" value="Login" /></li>
+       </div>
+    </form> 
+</ul>        

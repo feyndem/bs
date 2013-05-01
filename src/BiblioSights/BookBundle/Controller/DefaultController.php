@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction($book)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $BookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id',$book);
         $Book = $BookQuery->getSingleResult();        
         return $this->render('BookBundle:Default:index.html.twig', array('book'=>$Book));

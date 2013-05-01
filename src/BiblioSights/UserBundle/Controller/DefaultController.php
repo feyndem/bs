@@ -24,4 +24,16 @@ class DefaultController extends Controller
             'error' => $error
         ));
     }
+    public function loginBoxAction ()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        
+        $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR, $session->get(SecurityContext::AUTHENTICATION_ERROR));
+        
+        return $this->render('UserBundle:Default:loginBox.html.twig', array(
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'error' => $error
+        ));
+    }
 }

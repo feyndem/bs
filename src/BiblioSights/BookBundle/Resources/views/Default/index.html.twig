@@ -1,15 +1,19 @@
-<!DOCTYPE html> 
-<html lang='en'> 
-<head> 
-    <meta charset='utf-8' /> 
-    <title>My OpenLayers Map</title>
-    <script type="text/javascript" src="{{ asset ('bundles/book/js/OpenLayers.js') }}"></script>
-    <link rel="stylesheet" href= "{{ asset ('bundles/book/css/style.css') }}"   type="text/css" />
-    {% include 'BookBundle:OpenStreetJS:map.js.twig' with {'markers' : book.markers} %}
-</head>
-<body onload='init();'>
+{% extends '::base.html.twig' %}
+{% block title %}Bibliosights - Map{% endblock %}
+
+{# <link rel="stylesheet" href= "{{ asset ('bundles/book/css/style.css') }}"   type="text/css" /> #}
+{% block content %}    
     <div id="map_element" style='width: 100%; height: 500px;'></div>
     {{ book.created|date("m/d/Y") }}
     {{ book.id }}
-</body>
-</html>
+{% endblock %}   
+{% block sidebar %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BookBundle/Resources/public/js/vendor/OpenLayers.js' output='js/OpenLayers.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% include 'BookBundle:OpenStreetJS:map.js.twig' with {'markers' : book.markers} %}
+    {% endjavascripts %}
+    <script>init();</script>
+{% endblock %}          
