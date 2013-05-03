@@ -1,19 +1,28 @@
+{% if is_granted('ROLE_USER')%}
 <ul class="right">
-    <form action="{{ path('user_login_check') }}" method="POST">
-        <div class="column">
-            <li>
-            <label for="username">User: </label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
-            </li>
-       </div>
-       <div class="column">   
-           <li>
-           <label for="password">Password: </label>
-           <input type="password" id="password" name="_password" />
-           </li>
-       </div>
-       <div class="column">     
-           <li class="has-button"><input type="submit" name="login" value="Login" /></li>
-       </div>
-    </form> 
-</ul>        
+    <li class="has-form">
+        <div class="row collapse small-8 columns logged">Conectado como {{ app.user.email }}</div>
+    </li>
+    <li class="has-form">
+        <div class="small-4 columns"><a class="button" href="{{ path('user_logout') }}">Logout</a></div>
+    </li>
+</ul>
+{% else %}
+<ul class="right">
+    <li class="has-form">
+       <form action="{{ path('user_login_check') }}" method="POST">
+           <div class="row collpase">
+              <div class="small-5 columns">                 
+                <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="User"/>
+              </div>
+              <div class="small-5 columns">
+                <input type="password" id="password" name="_password" placeholder="Password"/>
+              </div>
+              <div class="small-2 columns"> 
+                <input type="submit" class="button" name="login" value="Login" />
+              </div>
+           </div>
+       </form> 
+   </li>        
+</ul>
+{% endif %}

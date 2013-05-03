@@ -11,6 +11,9 @@ security:
           login_path: /user/login
           check_path: /user/login_check
           default_target_path: /book/10
+        logout:
+          path: /user/logout
+          target:  /
     access_control:
       - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
