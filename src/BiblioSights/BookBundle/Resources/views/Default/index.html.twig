@@ -11,9 +11,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@BookBundle/Resources/public/js/vendor/OpenLayers.js' output='js/OpenLayers.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% include 'BookBundle:OpenStreetJS:map.js.twig' with {'markers' : book.markers} %}
+        {% include 'BookBundle:OpenStreetJS:map.js.twig' with {'markers' : book.markers} %}
     {% endjavascripts %}
     <script>init();</script>
 {% endblock %}          

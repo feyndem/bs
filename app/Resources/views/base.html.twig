@@ -7,6 +7,9 @@
         {% stylesheets '@BookBundle/Resources/public/css/basic.scss' filter="compass" %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+        {% stylesheets '@OpenLayersBundle/Resources/public/js/theme/default/style.css' output="js/theme/default/style.css" %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
     {% endblock %}         
 </head>
 <body>
@@ -43,11 +46,14 @@
         {% javascripts '@BookBundle/Resources/public/js/vendor/foundation.topbar.js' output='js/foundation.topbar.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
-        {% javascripts '@BookBundle/Resources/public/js/vendor/OpenLayers.js' output='js/OpenLayers.js' %}
+        {% javascripts '@OpenLayersBundle/Resources/public/js/OpenLayers.js' output='js/OpenLayers.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% javascripts '@OpenLayersBundle/Resources/public/js/BS_OpenLayers.js' output='js/BS_OpenLayers.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <script>
-        $(document).foundation();
+        $(document).foundation();        
         </script>
     {% endblock %}            
 </body>

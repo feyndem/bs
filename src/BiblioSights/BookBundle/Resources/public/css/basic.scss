@@ -1,14 +1,18 @@
 @import "foundation";
 @import "compass/css3";
 .simple   { @include border-radius(4px, 4px); }
-
+/*
 * {
  width: 500 px;
-}
+}*/
 
 .logged {
     font-size: 0.8125em;
     color: #FFF;
     height: 45px;
     line-height: 45px;
+}
+
+.row {
+    max-width:1280px;
 }
