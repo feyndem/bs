@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new BiblioSights\BookBundle\BookBundle(),
             new Bibliosights\UserBundle\UserBundle(),
             new BiblioSights\OpenLayersBundle\OpenLayersBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

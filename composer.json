@@ -23,7 +23,8 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "dev-master"
+        "stof/doctrine-extensions-bundle": "dev-master",
+        "jms/serializer-bundle": "0.12.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

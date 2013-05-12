@@ -1,3 +1,7 @@
 BookBundle_bookpage:
     pattern:  /{book}
     defaults: { _controller: BookBundle:Default:index }
+    
+BookBundle_geoJSON:
+    pattern: /json/
+    defaults: { _controller: BookBundle:Default:generateGeoJSON }

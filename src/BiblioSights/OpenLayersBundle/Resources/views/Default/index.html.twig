@@ -18,6 +18,7 @@
     </div>
 {% endblock %}   
 {% block sidebar %}
+    {{ render(controller('BookBundle:Default:generateGeoJSON')) }}
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
