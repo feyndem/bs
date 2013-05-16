@@ -3,9 +3,9 @@ var OSMlayer;
 var markersLayer;
 var addmarkerLayer;
 
-function OpenLayers_init () {
+function OpenLayers_init (book) {
     // Path to public img folder
-    OpenLayers.ImgPath = "bundles/openlayers/images/OLimg/";
+    OpenLayers.ImgPath = "bundles/book/images/OLimg/";
     // Creando el mapa en el DIV "map"
     map = new OpenLayers.Map("map", {
         projection: new OpenLayers.Projection('ESPG:900913'),
@@ -17,7 +17,7 @@ function OpenLayers_init () {
     markersLayer = new OpenLayers.Layer.Vector("Markers", {
         strategies: [new OpenLayers.Strategy.Fixed()],
         protocol: new OpenLayers.Protocol.HTTP({
-            url: "../book/json/",
+            url: "geojson/"+book,
             format: new OpenLayers.Format.GeoJSON()
         })
     });

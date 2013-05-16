@@ -21,5 +21,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script>OpenLayers_init();</script>
+    <script>
+        OpenLayers_init({{book}});
+    </script>
 {% endblock %}     

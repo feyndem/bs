@@ -19,10 +19,10 @@ class DefaultController extends Controller
         return $this->render('BookBundle:Default:home.html.twig');
     }
     
-    public function generateGeoJSONAction () 
+    public function generateGeoJSONAction ($book) 
     {
         $em = $this->getDoctrine()->getManager();
-        $BookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id', 12);
+        $BookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id', $book);
         $Book = $BookQuery->getSingleResult();
         $Book_Markers = $Book->getMarkers();
         $markers_array = array();
