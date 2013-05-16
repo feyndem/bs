@@ -1,3 +1,0 @@
-open_layers_homepage:
-    pattern:  /
-    defaults: { _controller: OpenLayersBundle:Default:index }
