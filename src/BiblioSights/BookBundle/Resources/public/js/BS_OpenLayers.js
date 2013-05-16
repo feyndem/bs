@@ -38,6 +38,16 @@ function OpenLayers_init (book) {
     markersLayer.events.register("loadend", markersLayer, function () {
         map.zoomToExtent(map.getLayer("JSON").getDataExtent());
     });
+    // Adding select feature control
+    var select = new OpenLayers.Control.SelectFeature(markersLayer);
+    map.addControl(select);
+    select.activate();  
+    // Select feature event
+    markersLayer.events.on({
+        featureselected: function(event) {
+            $('#data').empty().append("<p><strong>lat:</strong> "+event.feature.geometry.y+"</p><p><strong>lon:</strong> "+event.feature.geometry.x+"</p>");
+        }
+    });    
     // getInfo: 
     // a) Limit features added to one
     // b) Get feature addedd address to data div
@@ -50,16 +60,18 @@ function OpenLayers_init (book) {
            url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+event.geometry.y+"&lon="+event.geometry.x+"&zoom=18&addressdetails=1",
            success: function (data) {
                var parsedData = $.parseJSON(data);
-               $("#data").empty();
+               event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));             
+               $("#data").empty().append('<p><strong>lat: </strong>'+event.geometry.y+'</p><p><strong>lon: </strong>'+event.geometry.x+'</p>');               
                $.each(parsedData, function (index, value) {
                    var element = "";
                    var address;
+                   // Get address info
                    if (index === "address") {
                       address = value; 
                       $.each(address, function (index,value){
                           $('#data').append('<p><strong>'+index+':</strong> '+value+'</p>');
                       });
-                   };
+                   };                   
                });               
            }
         });
