@@ -21,6 +21,7 @@ function OpenLayers_init (book) {
             format: new OpenLayers.Format.GeoJSON()
         })
     });
+    markersLayer.id = "JSON";
     // Creando la capa vectorial que permita añadir un punto
     addmarkerLayer = new OpenLayers.Layer.Vector("Added");
     // Añadiendo capacidad para dibujar puntos
@@ -33,7 +34,10 @@ function OpenLayers_init (book) {
     map.addLayer(OSMlayer);
     map.addLayer(markersLayer);
     map.addLayer(addmarkerLayer);
-    map.zoomToMaxExtent();
+    // Registrando el evento "loadend" para evitar problemas al hacer zoom sobre los datos
+    markersLayer.events.register("loadend", markersLayer, function () {
+        map.zoomToExtent(map.getLayer("JSON").getDataExtent());
+    });
     // getInfo: 
     // a) Limit features added to one
     // b) Get feature addedd address to data div
