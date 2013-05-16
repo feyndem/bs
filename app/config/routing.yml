@@ -1,7 +1,3 @@
-open_layers:
-    resource: "@OpenLayersBundle/Resources/config/routing.yml"
-    prefix:   /openlayers
-
 home:
   pattern: /
   defaults: { _controller: BookBundle:Default:home }

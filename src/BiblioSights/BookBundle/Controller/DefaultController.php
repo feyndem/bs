@@ -11,10 +11,7 @@ class DefaultController extends Controller
 {
     public function indexAction($book)
     {
-        $em = $this->getDoctrine()->getManager();
-        $BookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id',$book);
-        $Book = $BookQuery->getSingleResult();        
-        return $this->render('BookBundle:Default:index.html.twig', array('book'=>$Book));
+        return $this->render('BookBundle:Default:index.html.twig', array('book'=>$book));
     }
     
     public function homeAction()

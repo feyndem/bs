@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new BiblioSights\MarkerBundle\MarkerBundle(),
             new BiblioSights\BookBundle\BookBundle(),
             new Bibliosights\UserBundle\UserBundle(),
-            new BiblioSights\OpenLayersBundle\OpenLayersBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 

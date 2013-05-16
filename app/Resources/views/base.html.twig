@@ -7,7 +7,7 @@
         {% stylesheets '@BookBundle/Resources/public/css/basic.scss' filter="compass" %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-        {% stylesheets '@OpenLayersBundle/Resources/public/js/theme/default/style.css' output="js/theme/default/style.css" %}
+        {% stylesheets '@BookBundle/Resources/public/js/theme/default/style.css' output="js/theme/default/style.css" %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
     {% endblock %}       
@@ -40,10 +40,10 @@
         {% javascripts '@BookBundle/Resources/public/js/vendor/jquery.js' output='js/jquery.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %} 
-        {% javascripts '@OpenLayersBundle/Resources/public/js/OpenLayers.js' output='js/OpenLayers.js' %}
+        {% javascripts '@BookBundle/Resources/public/js/OpenLayers.js' output='js/OpenLayers.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
-        {% javascripts '@OpenLayersBundle/Resources/public/js/BS_OpenLayers.js' output='js/BS_OpenLayers.js' %}
+        {% javascripts '@BookBundle/Resources/public/js/BS_OpenLayers.js' output='js/BS_OpenLayers.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         {% javascripts '@BookBundle/Resources/public/js/vendor/foundation.js' output='js/foundation.js' %}
