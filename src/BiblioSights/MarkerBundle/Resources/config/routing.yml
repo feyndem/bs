@@ -1,3 +1,7 @@
 BiblioSightsMarkerBundle_homepage:
     pattern:  /hello/{name}
-    defaults: { _controller: BiblioSightsMarkerBundle:Default:index }
+    defaults: { _controller: MarkerBundle:Default:index }
+    
+BiblioSightsMarkerBundle_newMarker:
+    pattern:  /newmarker
+    defaults: { _controller: MarkerBundle:Default:newMarker }    

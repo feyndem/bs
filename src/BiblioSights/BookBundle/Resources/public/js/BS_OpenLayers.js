@@ -51,6 +51,7 @@ function OpenLayers_init (book) {
     // getInfo: 
     // a) Limit features added to one
     // b) Get feature addedd address to data div
+    // c) Send marker data to the server
     function getInfo(event) {
         if (addmarkerLayer.features.length === 2) {
             addmarkerLayer.removeFeatures(addmarkerLayer.features[0]);
@@ -60,8 +61,10 @@ function OpenLayers_init (book) {
            url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+event.geometry.y+"&lon="+event.geometry.x+"&zoom=18&addressdetails=1",
            success: function (data) {
                var parsedData = $.parseJSON(data);
-               event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));             
-               $("#data").empty().append('<p><strong>lat: </strong>'+event.geometry.y+'</p><p><strong>lon: </strong>'+event.geometry.x+'</p>');               
+               event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+               var lat = event.geometry.y;
+               var lng = event.geometry.x;
+               $("#data").empty().append('<p><strong>lat: </strong>'+lat+'</p><p><strong>lon: </strong>'+lng+'</p>');               
                $.each(parsedData, function (index, value) {
                    var element = "";
                    var address;
@@ -69,10 +72,19 @@ function OpenLayers_init (book) {
                    if (index === "address") {
                       address = value; 
                       $.each(address, function (index,value){
-                          $('#data').append('<p><strong>'+index+':</strong> '+value+'</p>');
+                          $('#data').append('<p><strong>'+index+':</strong> '+value+'</p>');                          
                       });
                    };                   
-               });               
+               });
+               $('#data').append('<a href="#" class="button round small" id="savefeature">Guardar punto</a>');
+               $('#savefeature').click(function () {
+                   var newMarker = {
+                       lat: lat,
+                       lng: lng,
+                       address: parsedData.address
+                   };
+                   $.post("../newmarker", JSON.stringify(newMarker), 'json');                   
+               });
            }
         });
     };
