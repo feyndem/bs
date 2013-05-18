@@ -79,6 +79,7 @@ function OpenLayers_init (book) {
                $('#data').append('<a href="#" class="button round small" id="savefeature">Guardar punto</a>');
                $('#savefeature').click(function () {
                    var newMarker = {
+                       bookid: book,
                        lat: lat,
                        lng: lng,
                        address: parsedData.address
