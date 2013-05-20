@@ -45,7 +45,27 @@ function OpenLayers_init (book) {
     // Select feature event
     markersLayer.events.on({
         featureselected: function(event) {
-            $('#data').empty().append("<p><strong>lat:</strong> "+event.feature.geometry.y+"</p><p><strong>lon:</strong> "+event.feature.geometry.x+"</p>");
+            var coords = new OpenLayers.LonLat(event.feature.geometry.x, event.feature.geometry.y);
+            coords.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
+            //event.feature.geometry.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
+            $.ajax({            
+                url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+coords.lat+"&lon="+coords.lon+"&zoom=18&addressdetails=1",
+                success: function (data) {
+                    var parsedData = $.parseJSON(data);
+                    $.each(parsedData, function (index, value) {
+                        var element = "";
+                        var address;
+                        $('#data').empty();
+                        // Get address info
+                        if (index === "address") {
+                            address = value; 
+                            $.each(address, function (index,value){
+                                $('#data').append('<p><strong>'+index+':</strong> '+value+'</p>');                          
+                            });
+                        };                   
+                    });
+                }
+            });           
         }
     });    
     // getInfo: 
@@ -68,6 +88,7 @@ function OpenLayers_init (book) {
                $.each(parsedData, function (index, value) {
                    var element = "";
                    var address;
+                   $('#data').empty();
                    // Get address info
                    if (index === "address") {
                       address = value; 
