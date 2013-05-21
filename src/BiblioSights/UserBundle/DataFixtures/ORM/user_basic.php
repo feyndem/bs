@@ -20,7 +20,7 @@ class user_basic implements FixtureInterface, ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         $user = new User;
-        $clear_password = 'bsuser';
+        $clear_password = 'bsuser2';
         $salt = md5(time());
         
         $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
@@ -28,7 +28,7 @@ class user_basic implements FixtureInterface, ContainerAwareInterface
         
         $user->setPassword($password);
         $user->setSalt($salt);
-        $user->setEmail('mail@bibliosights.com');
+        $user->setEmail('mail2@bibliosights.com');
         $user->setRole('ROLE_USER');
         
         $manager->persist($user);
