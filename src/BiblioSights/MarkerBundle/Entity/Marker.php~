@@ -43,6 +43,20 @@ class Marker
      * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
      */
     protected $book;
+
+    /**
+     * @ORM\OneToOne(targetEntity="BiblioSights\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+ 
+    
+    public function __construct(\BiblioSights\BookBundle\Entity\Book $book)
+    {
+        $this->book = $book;
+        $book->addMarker($this);
+    }
     
     /**
      * Get id

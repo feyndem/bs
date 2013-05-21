@@ -44,6 +44,12 @@ class Marker
      */
     protected $book;
 
+    /**
+     * @ORM\OneToOne(targetEntity="BiblioSights\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
  
     
     public function __construct(\BiblioSights\BookBundle\Entity\Book $book)
@@ -125,5 +131,28 @@ class Marker
     public function getBook()
     {
         return $this->book;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \BiblioSights\UserBundle\Entity\User $user
+     * @return Marker
+     */
+    public function setUser(\BiblioSights\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \BiblioSights\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
