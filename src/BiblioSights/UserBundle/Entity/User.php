@@ -1,6 +1,6 @@
 <?php
 
-namespace Bibliosights\UserBundle\Entity;
+namespace BiblioSights\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;

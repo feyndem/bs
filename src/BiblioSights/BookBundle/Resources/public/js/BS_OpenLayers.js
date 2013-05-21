@@ -102,8 +102,7 @@ function OpenLayers_init (book) {
                    var newMarker = {
                        bookid: book,
                        lat: lat,
-                       lng: lng,
-                       address: parsedData.address
+                       lng: lng
                    };
                    $.post("../newmarker", JSON.stringify(newMarker), 'json');                   
                });

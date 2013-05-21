@@ -1,6 +1,6 @@
 <?php
 
-namespace Bibliosights\UserBundle\DependencyInjection;
+namespace BiblioSights\UserBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

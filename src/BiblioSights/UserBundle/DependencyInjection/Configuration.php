@@ -1,6 +1,6 @@
 <?php
 
-namespace Bibliosights\UserBundle\DependencyInjection;
+namespace BiblioSights\UserBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

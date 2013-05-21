@@ -1,6 +1,6 @@
 <?php
 
-namespace Bibliosights\UserBundle;
+namespace BiblioSights\UserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

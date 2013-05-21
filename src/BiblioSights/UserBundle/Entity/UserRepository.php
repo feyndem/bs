@@ -1,6 +1,6 @@
 <?php
 
-namespace Bibliosights\UserBundle\Entity;
+namespace BiblioSights\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

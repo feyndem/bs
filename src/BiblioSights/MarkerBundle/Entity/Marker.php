@@ -43,6 +43,8 @@ class Marker
      * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
      */
     protected $book;
+
+ 
     
     public function __construct(\BiblioSights\BookBundle\Entity\Book $book)
     {
