@@ -23,6 +23,7 @@ class DefaultController extends Controller
             // Checking if user is authenticated
             $securityContext = $this->container->get('security.context');
             if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $user = $securityContext->getToken()->getUser();
                 // Decode the request
                 $data = json_decode($request->getContent());
                 // Creating point from client data
@@ -37,6 +38,7 @@ class DefaultController extends Controller
                 $marker = new Marker($book);
                 // Adding point to marker
                 $marker->setPoint($point);
+                $marker->setUser($user);
                 $em->persist($marker);
                 $em->flush();
                 return $this->render('MarkerBundle:Default:addMarker.html.twig', array('request' => $data->bookid));             

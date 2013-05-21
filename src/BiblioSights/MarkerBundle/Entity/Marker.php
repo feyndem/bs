@@ -45,7 +45,7 @@ class Marker
     protected $book;
 
     /**
-     * @ORM\OneToOne(targetEntity="BiblioSights\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="BiblioSights\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
