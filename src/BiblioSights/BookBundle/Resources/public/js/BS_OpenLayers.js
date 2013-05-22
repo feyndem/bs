@@ -68,10 +68,16 @@ function OpenLayers_init (book) {
             });           
         }
     });    
-    // getInfo: 
-    // a) Limit features added to one
-    // b) Get feature addedd address to data div
-    // c) Send marker data to the server
+    /**
+     * 
+     * @function getInfo 
+     *      a) Limit features added to one
+     *      b) Get feature addedd address to data div
+     *      c) Add save button
+     *      d) Send marker data to the server
+     *      e) Return sucess or error message to the user
+     *      
+     */    
     function getInfo(event) {
         if (addmarkerLayer.features.length === 2) {
             addmarkerLayer.removeFeatures(addmarkerLayer.features[0]);
@@ -104,7 +110,12 @@ function OpenLayers_init (book) {
                        lat: lat,
                        lng: lng
                    };
-                   $.post("../newmarker", JSON.stringify(newMarker), 'json');                   
+                   $.post("../newmarker", JSON.stringify(newMarker), 'json').done(function(data) {
+                       $('#data').append(data);
+                       $('.close').on('click', function () {
+                           $(this).parent().hide();
+                       });
+                   });                   
                });
            }
         });

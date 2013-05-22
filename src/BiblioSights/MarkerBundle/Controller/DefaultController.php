@@ -41,9 +41,9 @@ class DefaultController extends Controller
                 $marker->setUser($user);
                 $em->persist($marker);
                 $em->flush();
-                return $this->render('MarkerBundle:Default:addMarker.html.twig', array('request' => $data->bookid));             
+                return $this->render('MarkerBundle:Default:addMarker.html.twig');             
             } else {
-                return $this->render('MarkerBundle:Default:addMarkerError.html.twig');
+                return $this->render('MarkerBundle:Default:addMarkerUserError.html.twig');
             }
         } else {
             return $this->render('MarkerBundle:Default:addMarkerError.html.twig');        
