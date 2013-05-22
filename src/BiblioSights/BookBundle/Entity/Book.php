@@ -30,6 +30,11 @@ class Book
      */
     private $markers;
     
+    /**
+     * @ORM\OneToMany(targetEntity="BiblioSights\BookBundle\Entity\ISBN", mappedBy="book")
+     */
+    private $ISBNs;
+    
      /**
      * @var datetime $created
      *
@@ -49,6 +54,7 @@ class Book
     public function __construct() 
     {
         $this->markers = new ArrayCollection();
+        $this->ISBNs = new ArrayCollection();
     }
 
     /**
@@ -135,5 +141,38 @@ class Book
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add ISBNs
+     *
+     * @param \BiblioSights\BookBundle\Entity\ISBN $iSBNs
+     * @return Book
+     */
+    public function addISBN(\BiblioSights\BookBundle\Entity\ISBN $iSBNs)
+    {
+        $this->ISBNs[] = $iSBNs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ISBNs
+     *
+     * @param \BiblioSights\BookBundle\Entity\ISBN $iSBNs
+     */
+    public function removeISBN(\BiblioSights\BookBundle\Entity\ISBN $iSBNs)
+    {
+        $this->ISBNs->removeElement($iSBNs);
+    }
+
+    /**
+     * Get ISBNs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getISBNs()
+    {
+        return $this->ISBNs;
     }
 }
