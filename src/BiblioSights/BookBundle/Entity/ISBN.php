@@ -29,6 +29,24 @@ class ISBN
     private $ISBN10;
     
     /**
+     * @var string
+     * @ORM\Column(name="Title", type="string", length=255)
+     */
+    private $Title;
+
+    /**
+     * @var smallint
+     * @ORM\Column(name="EditionYear", type="smallint")
+     */
+    private $EditionYear;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="lead", type="boolean")
+     */
+    private $lead;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="BiblioSights\BookBundle\Entity\Book", inversedBy="ISBNs")
      * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
      */
@@ -108,5 +126,74 @@ class ISBN
     public function getBook()
     {
         return $this->book;
+    }
+
+    /**
+     * Set Title
+     *
+     * @param string $title
+     * @return ISBN
+     */
+    public function setTitle($title)
+    {
+        $this->Title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get Title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->Title;
+    }
+
+    /**
+     * Set EditionYear
+     *
+     * @param integer $editionYear
+     * @return ISBN
+     */
+    public function setEditionYear($editionYear)
+    {
+        $this->EditionYear = $editionYear;
+    
+        return $this;
+    }
+
+    /**
+     * Get EditionYear
+     *
+     * @return integer 
+     */
+    public function getEditionYear()
+    {
+        return $this->EditionYear;
+    }
+
+    /**
+     * Set lead
+     *
+     * @param boolean $lead
+     * @return ISBN
+     */
+    public function setLead($lead)
+    {
+        $this->lead = $lead;
+    
+        return $this;
+    }
+
+    /**
+     * Get lead
+     *
+     * @return boolean 
+     */
+    public function getLead()
+    {
+        return $this->lead;
     }
 }

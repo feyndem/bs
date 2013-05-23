@@ -35,6 +35,12 @@ class Book
      */
     private $ISBNs;
     
+    /**
+     * @var smallint
+     * @ORM\Column(name="published", type="smallint")
+     */
+    private $published;
+    
      /**
      * @var datetime $created
      *
@@ -174,5 +180,28 @@ class Book
     public function getISBNs()
     {
         return $this->ISBNs;
+    }
+
+    /**
+     * Set published
+     *
+     * @param integer $published
+     * @return Book
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+    
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return integer 
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 }
