@@ -52,9 +52,8 @@ class ISBN
      */
     protected $book;
     
-    public function __construct($ISBN13, \BiblioSights\BookBundle\Entity\Book $book) 
+    public function __construct(\BiblioSights\BookBundle\Entity\Book $book) 
     {
-        $this->ISBN13 = $ISBN13;
         $this->book = $book;
         $book->addISBN($this);
     }

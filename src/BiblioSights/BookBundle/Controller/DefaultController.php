@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use BiblioSights\BookBundle\Entity\Book;
+use BiblioSights\BookBundle\Entity\ISBN;
+use BiblioSights\BookBundle\Form\Type\BookType;
 
 class DefaultController extends Controller
 {
@@ -45,5 +48,16 @@ class DefaultController extends Controller
         $result_json = json_encode($result);
         $response = new Response($result_json,200,array('content-type' => 'application/json'));
         return $response;
+    }
+    
+    public function newBookAction() 
+    {
+        $book = new Book();
+        $isbn = new ISBN($book);
+        $form = $this->createForm(new BookType(), $book);
+        return $this->render('BookBundle:Default:new.html.twig', array (
+            'form' => $form->createView()
+        ));
+        
     }
 }
