@@ -36,7 +36,12 @@ function OpenLayers_init (book) {
     map.addLayer(addmarkerLayer);
     // Registrando el evento "loadend" para evitar problemas al hacer zoom sobre los datos
     markersLayer.events.register("loadend", markersLayer, function () {
-        map.zoomToExtent(map.getLayer("JSON").getDataExtent());
+        var dataExtent = map.getLayer("JSON").getDataExtent();
+        if (dataExtent === null) {
+            map.zoomToMaxExtent();
+        } else {
+            map.zoomToExtent(dataExtent);
+        }        
     });
     // Adding select feature control
     var select = new OpenLayers.Control.SelectFeature(markersLayer);
