@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use BiblioSights\BookBundle\Entity\Book;
 use BiblioSights\BookBundle\Entity\ISBN;
 use BiblioSights\BookBundle\Form\Type\BookType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -50,14 +51,26 @@ class DefaultController extends Controller
         return $response;
     }
     
-    public function newBookAction() 
+    public function newBookAction(Request $request) 
     {
         $book = new Book();
         $isbn = new ISBN($book);
         $form = $this->createForm(new BookType(), $book);
-        return $this->render('BookBundle:Default:new.html.twig', array (
-            'form' => $form->createView()
-        ));
         
+        if($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $isbn->setLead(true);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($isbn);
+                $em->persist($book);
+                $em->flush();
+                return $this->redirect($this->generateUrl('home'));
+            }
+        } else {
+            return $this->render('BookBundle:Default:new.html.twig', array (
+                'form' => $form->createView()
+            ));
+        }        
     }
 }

@@ -3,6 +3,7 @@
 namespace BiblioSights\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ISBN
@@ -18,6 +19,10 @@ class ISBN
      *
      * @ORM\Column(name="ISBN13", type="string", length=13)
      * @ORM\Id
+     * @Assert\Length(
+     *      min="13",
+     *      max="13"
+     * )
      */
     private $ISBN13;
 
@@ -25,6 +30,10 @@ class ISBN
      * @var string
      *
      * @ORM\Column(name="ISBN10", type="string", length=10, nullable=true)
+     * @Assert\Length(
+     *      min="10",
+     *      max="10"
+     * )
      */
     private $ISBN10;
     
@@ -37,12 +46,16 @@ class ISBN
     /**
      * @var smallint
      * @ORM\Column(name="EditionYear", type="smallint")
+     * @Assert\MaxLength(4) 
+     * 
      */
     private $EditionYear;
 
     /**
      * @var boolean
      * @ORM\Column(name="lead", type="boolean")
+     * @Assert\NotNull()
+     * @Assert\Type(type="bool")
      */
     private $lead;
     

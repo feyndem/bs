@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use BiblioSights\MarkerBundle\Entity\Marker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -38,6 +39,7 @@ class Book
     /**
      * @var smallint
      * @ORM\Column(name="published", type="smallint")
+     * @Assert\NotBlank()
      */
     private $published;
     
