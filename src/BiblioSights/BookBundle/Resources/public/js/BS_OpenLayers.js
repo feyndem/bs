@@ -51,8 +51,8 @@ function OpenLayers_init (book) {
             $.ajax({            
                 url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+coords.lat+"&lon="+coords.lon+"&zoom=18&addressdetails=1",
                 success: function (data) {
-                    var parsedData = $.parseJSON(data);
-                    $.each(parsedData, function (index, value) {
+//                    var parsedData = $.parseJSON(data);
+                    $.each(data, function (index, value) {
                         var element = "";
                         var address;
                         $('#data').empty();
