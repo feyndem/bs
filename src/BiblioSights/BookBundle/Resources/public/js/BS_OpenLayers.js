@@ -91,11 +91,6 @@ function OpenLayers_init (book) {
         $.ajax({            
            url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+event.geometry.y+"&lon="+event.geometry.x+"&zoom=18&addressdetails=1",
            success: function (data) {
-<<<<<<< HEAD
-               // var parsedData = $.parseJSON(data);
-=======
-               //var parsedData = $.parseJSON(data);
->>>>>>> Book-Entity-Refactor
                event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                var lat = event.geometry.y;
                var lng = event.geometry.x;
