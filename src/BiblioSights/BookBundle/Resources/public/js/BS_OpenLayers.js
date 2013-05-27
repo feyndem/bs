@@ -36,7 +36,12 @@ function OpenLayers_init (book) {
     map.addLayer(addmarkerLayer);
     // Registrando el evento "loadend" para evitar problemas al hacer zoom sobre los datos
     markersLayer.events.register("loadend", markersLayer, function () {
-        map.zoomToExtent(map.getLayer("JSON").getDataExtent());
+        var dataExtent = map.getLayer("JSON").getDataExtent();
+        if (dataExtent === null) {
+            map.zoomToMaxExtent();
+        } else {
+            map.zoomToExtent(dataExtent);
+        }        
     });
     // Adding select feature control
     var select = new OpenLayers.Control.SelectFeature(markersLayer);
@@ -86,7 +91,11 @@ function OpenLayers_init (book) {
         $.ajax({            
            url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+event.geometry.y+"&lon="+event.geometry.x+"&zoom=18&addressdetails=1",
            success: function (data) {
+<<<<<<< HEAD
                // var parsedData = $.parseJSON(data);
+=======
+               //var parsedData = $.parseJSON(data);
+>>>>>>> Book-Entity-Refactor
                event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                var lat = event.geometry.y;
                var lng = event.geometry.x;

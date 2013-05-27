@@ -30,6 +30,17 @@ class Book
      */
     private $markers;
     
+    /**
+     * @ORM\OneToMany(targetEntity="BiblioSights\BookBundle\Entity\ISBN", mappedBy="book")
+     */
+    private $ISBNs;
+    
+    /**
+     * @var smallint
+     * @ORM\Column(name="published", type="smallint")
+     */
+    private $published;
+    
      /**
      * @var datetime $created
      *
@@ -49,6 +60,7 @@ class Book
     public function __construct() 
     {
         $this->markers = new ArrayCollection();
+        $this->ISBNs = new ArrayCollection();
     }
 
     /**
@@ -91,5 +103,82 @@ class Book
     public function getMarkers()
     {
         return $this->markers;
+    }
+
+    /**
+     * Set created
+     *
+     * @param datetime $created
+     * @return Book
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return datetime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param datetime $updated
+     * @return Book
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return datetime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Add ISBNs
+     *
+     * @param \BiblioSights\BookBundle\Entity\ISBN $iSBNs
+     * @return Book
+     */
+    public function addISBN(\BiblioSights\BookBundle\Entity\ISBN $iSBNs)
+    {
+        $this->ISBNs[] = $iSBNs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ISBNs
+     *
+     * @param \BiblioSights\BookBundle\Entity\ISBN $iSBNs
+     */
+    public function removeISBN(\BiblioSights\BookBundle\Entity\ISBN $iSBNs)
+    {
+        $this->ISBNs->removeElement($iSBNs);
+    }
+
+    /**
+     * Get ISBNs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getISBNs()
+    {
+        return $this->ISBNs;
     }
 }

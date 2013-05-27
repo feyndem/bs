@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use BiblioSights\MarkerBundle\Entity\Marker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -30,6 +31,18 @@ class Book
      */
     private $markers;
     
+    /**
+     * @ORM\OneToMany(targetEntity="BiblioSights\BookBundle\Entity\ISBN", mappedBy="book")
+     */
+    private $ISBNs;
+    
+    /**
+     * @var smallint
+     * @ORM\Column(name="published", type="smallint")
+     * @Assert\NotBlank()
+     */
+    private $published;
+    
      /**
      * @var datetime $created
      *
@@ -49,6 +62,7 @@ class Book
     public function __construct() 
     {
         $this->markers = new ArrayCollection();
+        $this->ISBNs = new ArrayCollection();
     }
 
     /**
@@ -135,5 +149,61 @@ class Book
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add ISBNs
+     *
+     * @param \BiblioSights\BookBundle\Entity\ISBN $iSBNs
+     * @return Book
+     */
+    public function addISBN(\BiblioSights\BookBundle\Entity\ISBN $iSBNs)
+    {
+        $this->ISBNs[] = $iSBNs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ISBNs
+     *
+     * @param \BiblioSights\BookBundle\Entity\ISBN $iSBNs
+     */
+    public function removeISBN(\BiblioSights\BookBundle\Entity\ISBN $iSBNs)
+    {
+        $this->ISBNs->removeElement($iSBNs);
+    }
+
+    /**
+     * Get ISBNs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getISBNs()
+    {
+        return $this->ISBNs;
+    }
+
+    /**
+     * Set published
+     *
+     * @param integer $published
+     * @return Book
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+    
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return integer 
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 }
