@@ -1,9 +1,38 @@
 {% extends '::base.html.twig' %}
+{% form_theme form 'BookBundle:Form:fields.html.twig' %}
 {% block title %}Bibliosights - New Book{% endblock %}
 
+
 {% block content %}
-<form action="#" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <input type="submit" />
-</form>
+   <div class="row">
+        <div class="large-12 columns">
+            <h3>Añade los datos del libro</h3>
+            <p>Si ahora mismo sólo nos puedes dar el título del libro, escríbelo en el campo <strong>"Título"</strong> y prueba nuestro <a href="#" id="googlebook">buscador de ediciones</a>.</p>
+            <form action="#" method="post" {{ form_enctype(form) }}>
+                {% for ISBN in form.ISBNs %}
+                    {{ form_row(ISBN.Title) }}
+                {% endfor %}                   
+                 
+                {{ form_row(form.published, {'attr': {'class': 'large-4 small-12 columns'}}) }}
+                {% for ISBN in form.ISBNs %}
+                    {{ form_row(ISBN.ISBN13, {'attr': {'class': 'large-4 small-12 columns'}}) }}
+                    {{ form_row(ISBN.ISBN10, {'attr': {'class': 'large-4 small-12 columns'}}) }}
+                    {{ form_row(ISBN.EditionYear, {'attr': {'class': 'large-4 small-12 columns'}}) }}
+                {% endfor %}    
+                {{ form_rest(form) }}
+                <div class="row"><input type="submit" class="button small" /></div>    
+                
+            </form>        
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">Datos de Google</div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BookBundle/Resources/public/js/BS_googlebooks.js' output='js/BS_googlebooks.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

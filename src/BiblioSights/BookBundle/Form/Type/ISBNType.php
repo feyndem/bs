@@ -8,10 +8,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ISBNType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('ISBN13', null);
-        $builder->add('ISBN10', null);
-        $builder->add('Title', null);
-        $builder->add('EditionYear', null);        
+        $builder->add('ISBN13', null, array(
+            'label' => 'ISBN 13'
+        ));
+        $builder->add('ISBN10', null, array(
+            'label' => 'ISBN 10'
+        ));
+        $builder->add('Title', null, array(
+            'label' => 'Título'
+        ));
+        $builder->add('EditionYear', null, array(
+            'label' => 'Año de edición'
+        ));        
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
