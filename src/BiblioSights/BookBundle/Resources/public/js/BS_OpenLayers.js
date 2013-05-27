@@ -51,7 +51,7 @@ function OpenLayers_init (book) {
             $.ajax({            
                 url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+coords.lat+"&lon="+coords.lon+"&zoom=18&addressdetails=1",
                 success: function (data) {
-//                    var parsedData = $.parseJSON(data);
+                    //var parsedData = $.parseJSON(data);
                     $.each(data, function (index, value) {
                         var element = "";
                         var address;
@@ -86,12 +86,12 @@ function OpenLayers_init (book) {
         $.ajax({            
            url: "http://nominatim.openstreetmap.org/reverse?format=json&lat="+event.geometry.y+"&lon="+event.geometry.x+"&zoom=18&addressdetails=1",
            success: function (data) {
-               var parsedData = $.parseJSON(data);
+               // var parsedData = $.parseJSON(data);
                event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                var lat = event.geometry.y;
                var lng = event.geometry.x;
                $("#data").empty().append('<p><strong>lat: </strong>'+lat+'</p><p><strong>lon: </strong>'+lng+'</p>');               
-               $.each(parsedData, function (index, value) {
+               $.each(data, function (index, value) {
                    var element = "";
                    var address;
                    $('#data').empty();
