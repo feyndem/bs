@@ -8,7 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class BookType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('published', null);
+        $builder->add('published', null, array(
+            'label' => 'Año de publicación'
+        ));
         $builder->add('ISBNs', 'collection', array (
             'type' => new ISBNType(),
             'by_reference' => false
