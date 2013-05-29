@@ -38,6 +38,15 @@ $('#googlebook').on('click', function (event) {
         GoogleDiv.append(newdiv);
         $("#googlebooks_"+index).on('click', function (event) {
            alert("clicked"+index); 
+           var titleField = $('#Book_ISBNs_0_Title');
+           var isbn13Field = $('#Book_ISBNs_0_ISBN13');
+           var isbn10Field = $('#Book_ISBNs_0_ISBN10');
+           var editionyearField = $('#Book_ISBNs_0_EditionYear');
+           
+           titleField.val($(this).attr('data-bstitle'));           
+           isbn13Field.val($(this).attr('data-bsisbn_13'));           
+           isbn10Field.val($(this).attr('data-bsisbn_10'));           
+           editionyearField.val($(this).attr('data-bspublisheddate').substring(0,4));           
         });
     };    
 });

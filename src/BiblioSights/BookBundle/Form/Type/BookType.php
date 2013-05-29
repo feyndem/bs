@@ -9,7 +9,8 @@ class BookType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('published', null, array(
-            'label' => 'Año de publicación'
+            'label' => 'Primera edición',
+            'required' => false
         ));
         $builder->add('ISBNs', 'collection', array (
             'type' => new ISBNType(),

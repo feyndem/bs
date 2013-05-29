@@ -38,8 +38,7 @@ class Book
     
     /**
      * @var smallint
-     * @ORM\Column(name="published", type="smallint")
-     * @Assert\NotBlank()
+     * @ORM\Column(name="published", type="smallint", nullable=true)
      */
     private $published;
     
@@ -190,7 +189,7 @@ class Book
      * @param integer $published
      * @return Book
      */
-    public function setPublished($published)
+    public function setPublished($published = null)
     {
         $this->published = $published;
     
