@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use BiblioSights\BookBundle\Entity\Book;
 use BiblioSights\BookBundle\Entity\ISBN;
+use BiblioSights\BookBundle\Entity\Author;
 use BiblioSights\BookBundle\Form\Type\BookType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -55,6 +56,8 @@ class DefaultController extends Controller
     {
         $book = new Book();
         $isbn = new ISBN($book);
+        $author = new Author();
+        $book->getAuthors()->add($author);
         $form = $this->createForm(new BookType(), $book);
         
         if($request->isMethod('POST')) {

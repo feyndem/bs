@@ -37,7 +37,7 @@ class Book
     private $ISBNs;
     
     /**
-     * @ORM\ManyToMany(targetEntity="BiblioSights\BookBundle\Entity\Author", inversedBy="books")
+     * @ORM\ManyToMany(targetEntity="BiblioSights\BookBundle\Entity\Author", inversedBy="books", cascade={"persist"})
      * @ORM\JoinTable(name="book_author")
      */
     private $authors;

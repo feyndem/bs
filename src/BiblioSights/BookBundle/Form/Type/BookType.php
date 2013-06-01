@@ -16,6 +16,11 @@ class BookType extends AbstractType
             'type' => new ISBNType(),
             'by_reference' => false
         ));
+        $builder->add('authors', 'collection', array (
+            'type' => new AuthorType(),
+            'by_reference' => false,
+            'allow_add'    => true,
+        ));
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
