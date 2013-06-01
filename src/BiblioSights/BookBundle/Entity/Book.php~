@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use BiblioSights\MarkerBundle\Entity\Marker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -36,8 +37,14 @@ class Book
     private $ISBNs;
     
     /**
+     * @ORM\ManyToMany(targetEntity="BiblioSights\BookBundle\Entity\Author", inversedBy="books")
+     * @ORM\JoinTable(name="book_author")
+     */
+    private $authors;
+    
+    /**
      * @var smallint
-     * @ORM\Column(name="published", type="smallint")
+     * @ORM\Column(name="published", type="smallint", nullable=true)
      */
     private $published;
     
@@ -61,6 +68,7 @@ class Book
     {
         $this->markers = new ArrayCollection();
         $this->ISBNs = new ArrayCollection();
+        $this->authors = new ArrayCollection();
     }
 
     /**
@@ -180,5 +188,28 @@ class Book
     public function getISBNs()
     {
         return $this->ISBNs;
+    }
+
+    /**
+     * Set published
+     *
+     * @param integer $published
+     * @return Book
+     */
+    public function setPublished($published = null)
+    {
+        $this->published = $published;
+    
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return integer 
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 }

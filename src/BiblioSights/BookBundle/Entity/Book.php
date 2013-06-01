@@ -37,6 +37,12 @@ class Book
     private $ISBNs;
     
     /**
+     * @ORM\ManyToMany(targetEntity="BiblioSights\BookBundle\Entity\Author", inversedBy="books")
+     * @ORM\JoinTable(name="book_author")
+     */
+    private $authors;
+    
+    /**
      * @var smallint
      * @ORM\Column(name="published", type="smallint", nullable=true)
      */
@@ -62,6 +68,7 @@ class Book
     {
         $this->markers = new ArrayCollection();
         $this->ISBNs = new ArrayCollection();
+        $this->authors = new ArrayCollection();
     }
 
     /**
@@ -204,5 +211,39 @@ class Book
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Add authors
+     *
+     * @param \BiblioSights\BookBundle\Entity\Author $authors
+     * @return Book
+     */
+    public function addAuthor(\BiblioSights\BookBundle\Entity\Author $author)
+    {
+        $author->addBook($this);
+        $this->authors[] = $author;
+    
+        return $this;
+    }
+
+    /**
+     * Remove authors
+     *
+     * @param \BiblioSights\BookBundle\Entity\Author $authors
+     */
+    public function removeAuthor(\BiblioSights\BookBundle\Entity\Author $author)
+    {
+        $this->authors->removeElement($author);
+    }
+
+    /**
+     * Get authors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
     }
 }
