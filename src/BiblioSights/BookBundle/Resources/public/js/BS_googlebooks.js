@@ -5,13 +5,16 @@
  * @var newLinkli 
  */
 var collectionHolder = $('ul.authors');
-var $addAuthorLink = $('<a href="#" class="add_author_link">Añade más autores</a>');
+var $addAuthorLink = $('<a href="#" class="add_author_link button tiny secondary">Añade más autores</a>');
 var $newLinkLi = $('<p></p>').append($addAuthorLink);
 collectionHolder.append($newLinkLi);
 collectionHolder.data('index', collectionHolder.find(':input').length);
 $addAuthorLink.on('click', function (e) {
     e.preventDefault();
     addTagForm(collectionHolder, $newLinkLi);
+});
+collectionHolder.find('li').each(function () {
+        addTagFormDeleteLink($(this));
 });
 
 $('#googlebook').on('click', function (event) {
@@ -56,6 +59,9 @@ function volumeObj(index, value, GoogleDiv) {
     newdiv.innerHTML = JSON.stringify(value["volumeInfo"]["title"]);
     GoogleDiv.append(newdiv);
     $("#googlebooks_"+index).on('click', function (event) {
+       // Eliminamos todos los campos author menos el primero
+       $(".addAuthor").remove();
+        
        var titleField = $('#Book_ISBNs_0_Title');
        var isbn13Field = $('#Book_ISBNs_0_ISBN13');
        var isbn10Field = $('#Book_ISBNs_0_ISBN10');
@@ -102,6 +108,16 @@ function addTagForm(collectionHolder, $newLinkLi) {
     collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<p></p>').append(newForm);
+    var $newFormLi = $('<p class="addAuthor"></p>').append(newForm);
     $newLinkLi.before($newFormLi);
+    addTagFormDeleteLink($newFormLi);
+}
+
+function addTagFormDeleteLink ($tagFormLi) {
+    var $removeFormA = $('<a href="#" class="deleteAuthor button tiny round secondary">X</a>');
+    $tagFormLi.append($removeFormA);
+    $removeFormA.on('click', function (e) {
+        e.preventDefault();
+        $tagFormLi.remove();
+    });
 }

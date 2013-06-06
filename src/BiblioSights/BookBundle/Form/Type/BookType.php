@@ -20,6 +20,7 @@ class BookType extends AbstractType
             'type' => new AuthorType(),
             'by_reference' => false,
             'allow_add'    => true,
+            'allow_delete'    => true,            
         ));
     }
     
