@@ -71,16 +71,14 @@ function volumeObj(index, value, GoogleDiv) {
        var bsauthors = $(this).attr('data-bsauthor');
        bsauthors = bsauthors.substring(0, bsauthors.length-2);
        var authorsArray = bsauthors.split("__");
-       alert(authorsArray);
+       for (var i=1; i<authorsArray.length; i++) {
+           addTagForm(collectionHolder, $newLinkLi);
+       };
+       var authorInputsArray = $('input[id^="Book_authors_"]');
        
-       $.each(authorsArray, function (index, value) {
-           if (index === 0) {
-               $('#Book_authors_'+index+"_name").val(value);
-           } else {
-               addTagForm(collectionHolder, $newLinkLi);
-               $('#Book_authors_'+index+"_name").val(value);
-           }
-       });       
+       $.each(authorsArray, function(index, value) {
+           authorInputsArray.eq(index).val(value);
+       });   
 
        titleField.val($(this).attr('data-bstitle'));           
        isbn13Field.val($(this).attr('data-bsisbn_13'));           
