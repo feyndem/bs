@@ -7,3 +7,7 @@ user_login_check:
 
 user_logout:
     pattern:  /logout
+    
+user_new:
+    pattern: /new
+    defaults: { _controller: UserBundle:Default:new }

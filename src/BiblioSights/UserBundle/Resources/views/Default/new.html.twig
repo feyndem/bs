@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+{% block title %}Bibliosights - New User{% endblock %}
+
+{% block content %}
+   <div class="row">
+        <div class="large-12 columns">
+            <h3>Regístrate como usuario</h3>
+            <form action="#" method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+                <div class="row"><input type="submit" class="button small" /></div>                    
+            </form>        
+        </div>
+    </div>
+{% endblock %}

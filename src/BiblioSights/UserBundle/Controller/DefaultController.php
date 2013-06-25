@@ -4,6 +4,9 @@ namespace BiblioSights\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use BiblioSights\UserBundle\Entity\User;
+use BiblioSights\UserBundle\Form\Type\UserType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -35,5 +38,32 @@ class DefaultController extends Controller
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error' => $error
         ));
+    }
+    public function newAction (Request $request) 
+    {
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user);
+        
+        if($request->isMethod('POST')) {
+            $form->bind($request);
+            if($form->isValid()) {
+                
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $user->setSalt(md5(time()));
+                $codifiedPassword = $encoder->encodePassword(
+                        $user->getPassword(),
+                        $user->getSalt()
+                        );
+                $user->setPassword($codifiedPassword);
+                $user->setRole('ROLE_USER');
+                
+                $em = $this->getDoctrine()->getManager();
+                
+                $em->persist($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('home'));
+            }
+        }
+        return $this->render('UserBundle:Default:new.html.twig', array('form' => $form->createView()));                        
     }
 }

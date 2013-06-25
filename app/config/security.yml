@@ -10,13 +10,14 @@ security:
         form_login: 
           login_path: /user/login
           check_path: /user/login_check
-          default_target_path: /book/10
+          default_target_path: /
         logout:
           path: /user/logout
           target:  /
     access_control:
       - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/user/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/user/*, roles: IS_USER }
     providers:
       users:
