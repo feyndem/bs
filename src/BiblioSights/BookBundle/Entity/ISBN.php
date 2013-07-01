@@ -4,6 +4,7 @@ namespace BiblioSights\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use BiblioSights\BookBundle\Util\Util;
 
 /**
  * ISBN
@@ -42,6 +43,11 @@ class ISBN
      * @ORM\Column(name="Title", type="string", length=255)
      */
     private $Title;
+    
+    /**
+     * @ORM\Column(name="titleslug", type="string", length=255)
+     */
+    private $titleSlug;
 
     /**
      * @var smallint
@@ -149,6 +155,7 @@ class ISBN
     public function setTitle($title)
     {
         $this->Title = $title;
+        $this->titleSlug = Util::getSlug($this->Title);
     
         return $this;
     }
@@ -207,5 +214,28 @@ class ISBN
     public function getLead()
     {
         return $this->lead;
+    }
+
+    /**
+     * Set titleSlug
+     *
+     * @param string $titleSlug
+     * @return ISBN
+     */
+    public function setTitleSlug($titleSlug)
+    {
+        $this->titleSlug = $titleSlug;
+    
+        return $this;
+    }
+
+    /**
+     * Get titleSlug
+     *
+     * @return string 
+     */
+    public function getTitleSlug()
+    {
+        return $this->titleSlug;
     }
 }

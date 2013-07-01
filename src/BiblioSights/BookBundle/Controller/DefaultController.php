@@ -18,7 +18,11 @@ class DefaultController extends Controller
     {
         // Get the book from table
         $em = $this->getDoctrine()->getManager();
-        $bookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id', $book);
+        if (is_numeric($book)) {
+            $bookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b WHERE b.id = :id')->setParameter('id', $book);
+        } elseif (is_string($book)) {
+            $bookQuery = $em->createQuery('SELECT b FROM BookBundle:Book b JOIN b.ISBNs i WHERE i.titleSlug = :titleSlug')->setParameter('titleSlug', $book);            
+        }            
         $Book = $bookQuery->getSingleResult();
         // render template
         return $this->render('BookBundle:Default:index.html.twig', array('book'=>$Book));
