@@ -245,5 +245,5 @@ class Book
     public function getAuthors()
     {
         return $this->authors;
-    }
+    } 
 }
