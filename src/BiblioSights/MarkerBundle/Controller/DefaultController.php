@@ -30,6 +30,7 @@ class DefaultController extends Controller
                 // Getting data
                 $lat = $data->lat;
                 $lng = $data->lng;
+                $city = $data->city;
                 // We need the book entity to create the related marker
                 $book = $this->getDoctrine()->getRepository('BookBundle:Book')->find($data->bookid);
                 // Creating point
@@ -37,6 +38,7 @@ class DefaultController extends Controller
                 // Creating marker for the book
                 $marker = new Marker($book);
                 // Adding point to marker
+                $marker->setCity($city);                        
                 $marker->setPoint($point);
                 $marker->setUser($user);
                 $em->persist($marker);

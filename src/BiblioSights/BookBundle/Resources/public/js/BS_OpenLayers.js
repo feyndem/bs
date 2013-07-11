@@ -94,6 +94,7 @@ function OpenLayers_init (book) {
                event.geometry.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                var lat = event.geometry.y;
                var lng = event.geometry.x;
+               var city;
                $("#data").empty().append('<p><strong>lat: </strong>'+lat+'</p><p><strong>lon: </strong>'+lng+'</p>');               
                $.each(data, function (index, value) {
                    var element = "";
@@ -103,6 +104,7 @@ function OpenLayers_init (book) {
                    if (index === "address") {
                       address = value; 
                       $.each(address, function (index,value){
+                          if (index === "city") city = value;
                           $('#data').append('<p><strong>'+index+':</strong> '+value+'</p>');                          
                       });
                    };                   
@@ -112,7 +114,8 @@ function OpenLayers_init (book) {
                    var newMarker = {
                        bookid: book,
                        lat: lat,
-                       lng: lng
+                       lng: lng,
+                       city: city
                    };
                    $.post("../newmarker", JSON.stringify(newMarker), 'json').done(function(data) {
                        $('#data').append(data);
