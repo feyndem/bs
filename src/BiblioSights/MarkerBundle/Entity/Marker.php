@@ -49,7 +49,12 @@ class Marker
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
-
+    
+    /**
+     * @ORM\Column(name="city", type="string", length=255)
+     * 
+     */
+    private $city;
  
     
     public function __construct(\BiblioSights\BookBundle\Entity\Book $book)
@@ -154,5 +159,28 @@ class Marker
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Marker
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }
