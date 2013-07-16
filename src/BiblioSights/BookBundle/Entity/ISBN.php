@@ -52,8 +52,9 @@ class ISBN
     /**
      * @var smallint
      * @ORM\Column(name="EditionYear", type="smallint")
-     * @Assert\MaxLength(4) 
-     * 
+     * @Assert\Length(
+     *      max="4"
+     * ) 
      */
     private $EditionYear;
 
