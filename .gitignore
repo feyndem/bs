@@ -18,3 +18,5 @@ nbproject/private/
 nbproject/project.properties
 
 .DS_Store
+
+/app/config/parameters.yml

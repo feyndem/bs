@@ -109,6 +109,9 @@ function OpenLayers_init (book) {
                       });
                    };                   
                });
+               if (city === undefined) {
+                   city = null;
+               }
                $('#data').append('<a href="#" class="button round small" id="savefeature">Guardar punto</a>');
                $('#savefeature').click(function () {
                    var newMarker = {
